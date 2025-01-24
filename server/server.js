@@ -11,7 +11,7 @@ connectDB();
 
 // Middleware
 app.use(cors({
-  origin: ['https://your-frontend-vercel-url.vercel.app', 'http://localhost:3000'],
+  origin: ['https://secure-bank-teal.vercel.app', 'http://localhost:3000'],
   credentials: true
 }));
 app.use(express.json());
