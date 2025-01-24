@@ -56,18 +56,13 @@ const SignUp = () => {
     setLoading(true);
 
     try {
-      const userData = {
-        firstName: formData.firstName,
-        lastName: formData.lastName,
-        email: formData.email,
-        phone: formData.phone,
-        password: formData.password,
-      };
-
-      const response = await register(userData);
+      console.log('Sending registration request:', formData);
+      const response = await register(formData);
+      console.log('Registration response:', response);
       setUser(response);
-      navigate('/'); // Redirect to home page after successful registration
+      navigate('/');
     } catch (error) {
+      console.error('Registration error:', error);
       setError(error.toString());
     } finally {
       setLoading(false);

@@ -22,5 +22,8 @@ export default defineConfig({
     include: /src\/.*\.jsx?$/,
     exclude: []
   },
-  assetsInclude: ['**/*.jpg', '**/*.png', '**/*.svg']
+  assetsInclude: ['**/*.jpg', '**/*.png', '**/*.svg'],
+  define: {
+    'process.env': {}
+  }
 }); 

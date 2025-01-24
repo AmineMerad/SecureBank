@@ -21,14 +21,31 @@ api.interceptors.request.use((config) => {
 
 export const register = async (userData) => {
   try {
-    const response = await api.post('/register', userData);
+    console.log('Making registration request to:', API_URL);
+    console.log('Environment:', import.meta.env.MODE);
+    console.log('API URL from env:', import.meta.env.VITE_API_URL);
+    
+    const response = await api.post('/register', userData, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    
+    console.log('Registration response:', response.data);
+    
     if (response.data.token) {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('user', JSON.stringify(response.data));
     }
     return response.data;
   } catch (error) {
-    throw error.response?.data?.message || 'An error occurred during registration';
+    console.error('Registration error details:', {
+      error: error,
+      response: error.response,
+      status: error.response?.status,
+      data: error.response?.data,
+    });
+    throw error.response?.data?.message || error.message || 'An error occurred during registration';
   }
 };
 

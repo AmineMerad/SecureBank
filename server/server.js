@@ -12,12 +12,20 @@ connectDB();
 // Middleware
 app.use(cors({
   origin: ['https://secure-bank-teal.vercel.app', 'http://localhost:3000'],
-  credentials: true
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: true,
+  maxAge: 86400 // 24 hours
 }));
 app.use(express.json());
 
 // Routes
 app.use('/api/auth', authRoutes);
+
+// Add a test endpoint
+app.get('/api/auth/test', (req, res) => {
+  res.json({ message: 'Backend is working' });
+});
 
 // Error handling middleware
 app.use((err, req, res, next) => {
